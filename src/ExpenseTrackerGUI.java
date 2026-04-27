@@ -7,7 +7,6 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-// 1. DATA BLUEPRINT
 class ExpenseEntry implements Serializable {
     private String name;
     private double cost;
@@ -23,7 +22,6 @@ class ExpenseEntry implements Serializable {
     public String toFileString() { return name + "," + cost + "," + category; }
 }
 
-// 2. MAIN GUI WINDOW
 public class ExpenseTrackerGUI extends JFrame {
     private ArrayList<ExpenseEntry> entries = new ArrayList<>();
     private DefaultTableModel tableModel;
@@ -37,25 +35,21 @@ public class ExpenseTrackerGUI extends JFrame {
         setSize(850, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        // Main Container
         JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         setContentPane(mainPanel);
 
-        // Header
         statusLabel = new JLabel();
         updateStatus();
         statusLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         add(statusLabel, BorderLayout.NORTH);
 
-        // Data Table
         String[] columns = {"Item Name", "Amount", "Category"};
         tableModel = new DefaultTableModel(columns, 0);
         table = new JTable(tableModel);
         table.setRowHeight(25);
         add(new JScrollPane(table), BorderLayout.CENTER);
 
-        // Input Form
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(), "Manage Expenses", TitledBorder.LEFT, TitledBorder.TOP, 
@@ -74,7 +68,6 @@ public class ExpenseTrackerGUI extends JFrame {
         gbc.gridx = 0; gbc.gridy = 1; formPanel.add(new JLabel("Category:"), gbc);
         gbc.gridx = 1; catField = new JTextField(); formPanel.add(catField, gbc);
 
-        // Buttons
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         JButton addButton = new JButton("Add Entry");
         JButton deleteButton = new JButton("Delete Selected");
@@ -89,7 +82,6 @@ public class ExpenseTrackerGUI extends JFrame {
 
         add(formPanel, BorderLayout.SOUTH);
 
-        // --- BUTTON LOGIC ---
         addButton.addActionListener(e -> {
             try {
                 String name = nameField.getText().trim();
