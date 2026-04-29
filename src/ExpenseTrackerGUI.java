@@ -4,23 +4,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.util.ArrayList;
-
-class ExpenseEntry implements Serializable {
-    private String name;
-    private double cost;
-    private String category;
-
-    public ExpenseEntry(String name, double cost, String category) {
-        this.name = name;
-        this.cost = cost;
-        this.category = category;
-    }
-
-    public double getCost() { return cost; }
-    public String toFileString() { return name + "," + cost + "," + category; }
-}
 
 public class ExpenseTrackerGUI extends JFrame {
     private ArrayList<ExpenseEntry> entries = new ArrayList<>();
@@ -129,10 +113,5 @@ public class ExpenseTrackerGUI extends JFrame {
     private void updateStatus() {
         statusLabel.setText(String.format("Total Spending: ₹%.2f", totalSpent));
         statusLabel.setForeground(new Color(0, 100, 0));
-    }
-
-    public static void main(String[] args) {
-        try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); } catch (Exception e) {}
-        new ExpenseTrackerGUI();
     }
 }
